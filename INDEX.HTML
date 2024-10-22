@@ -1,65 +1,68 @@
-GET https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.5665,126.978&radius=1500&type=restaurant&key=AIzaSyAjMNd7u5X5jetqbFXJEr-hF-Ku8_oReGI
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>Places API Restaurant Search</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjMNd7u5X5jetqbFXJEr-hF-Ku8_oReGI&libraries=places"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Places Search</title>
     <style>
-        #map {
-            height: 100vh;
+        table {
             width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
+    <h1>주변 식당 및 호텔 검색</h1>
+    <table id="placesTable">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>위도</th>
+                <th>경도</th>
+                <th>주소</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 
-<div id="map"></div>
+    <script>
+        // Google Maps API 키
+        const apiKey = 'AIzaSyAjMNd7u5X5jetqbFXJEr-hF-Ku8_oReGI'; // 여기에 발급받은 API 키를 입력하세요.
+        
+        // 검색할 위치 (위도, 경도)
+        const latitude = '37.7749'; // 샌프란시스코 위도
+        const longitude = '-122.4194'; // 샌프란시스코 경도
+        const radius = '1500'; // 반경 1.5km
+        
+        // API 요청 URL
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=restaurant|hotel&key=${apiKey}`;
 
-<script>
-    function initMap() {
-        // 방콕 중심 좌표로 맵 초기화
-        const bangkok = { lat: 13.7563, lng: 100.5018 };
-        const map = new google.maps.Map(document.getElementById("map"), {
-            center: bangkok,
-            zoom: 13
-        });
-
-        // Places API 요청을 위한 서비스 객체 생성
-        const service = new google.maps.places.PlacesService(map);
-
-        // 방콕 주변 식당 검색
-        service.nearbySearch({
-            location: bangkok,
-            radius: 5000, // 반경 5km
-            type: ['restaurant'] // 식당만 검색
-        }, (results, status) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                results.forEach(place => {
-                    // 각 식당 위치에 마커 표시
-                    const marker = new google.maps.Marker({
-                        map: map,
-                        position: place.geometry.location,
-                        title: place.name
-                    });
-
-                    // 마커 클릭 시 정보 표시
-                    const infowindow = new google.maps.InfoWindow({
-                        content: `<h3>${place.name}</h3><p>${place.vicinity}</p>`
-                    });
-
-                    marker.addListener('click', () => {
-                        infowindow.open(map, marker);
-                    });
+        // API 호출
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const placesTableBody = document.querySelector('#placesTable tbody');
+                
+                data.results.forEach(place => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${place.name}</td>
+                        <td>${place.geometry.location.lat}</td>
+                        <td>${place.geometry.location.lng}</td>
+                        <td>${place.vicinity}</td>
+                    `;
+                    placesTableBody.appendChild(row);
                 });
-            }
-        });
-    }
-
-    // 페이지 로드 시 지도와 Places API 초기화
-    window.onload = initMap;
-</script>
-
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
 </body>
 </html>
