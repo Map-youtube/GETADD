@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Places API Example</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+    function initMap() {
+        // 지도 초기화
+        const centerLocation = { lat: 13.7563, lng: 100.5018 }; // 방콕 중심 좌표
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: centerLocation,
+            zoom: 13
+        });
+
+        // Google Places API 서비스 객체 생성
+        const service = new google.maps.places.PlacesService(map);
+
+        // 주변 식당 검색
+        service.nearbySearch({
+            location: centerLocation,
+            radius: 5000, // 반경 5km
+            type: ['restaurant'] // 식당 검색
+        }, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                results.forEach(place => {
+                    // 각 식당 위치에 마커 표시
+                    const marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location,
+                        title: place.name
+                    });
+
+                    // 마커 클릭 시 정보 표시
+                    const infowindow = new google.maps.InfoWindow({
+                        content: `<h3>${place.name}</h3><p>${place.vicinity}</p>`
+                    });
+
+                    marker.addListener('click', () => {
+                        infowindow.open(map, marker);
+                    });
+                });
+            }
+        });
+    }
+
+    // 페이지 로드 시 지도와 Places API 초기화
+    window.onload = initMap;
+</script>
+
+</body>
+</html>
