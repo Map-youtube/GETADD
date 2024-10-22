@@ -1,1 +1,68 @@
-GET https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.5665,126.978&radius=1500&type=restaurant&key=AIzaSyAjMNd7u5X5jetqbFXJEr-hF-Ku8_oReGI
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Places Search</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>주변 식당 및 호텔 검색</h1>
+    <table id="placesTable">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>위도</th>
+                <th>경도</th>
+                <th>주소</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // Google Maps API 키
+        const apiKey = 'AIzaSyAjMNd7u5X5jetqbFXJEr-hF-Ku8_oReGI'; // 여기에 발급받은 API 키를 입력하세요.
+        
+        // 검색할 위치 (위도, 경도)
+        const latitude = '37.7749'; // 샌프란시스코 위도
+        const longitude = '-122.4194'; // 샌프란시스코 경도
+        const radius = '1500'; // 반경 1.5km
+        
+        // API 요청 URL
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=restaurant|hotel&key=${apiKey}`;
+
+        // API 호출
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const placesTableBody = document.querySelector('#placesTable tbody');
+                
+                data.results.forEach(place => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${place.name}</td>
+                        <td>${place.geometry.location.lat}</td>
+                        <td>${place.geometry.location.lng}</td>
+                        <td>${place.vicinity}</td>
+                    `;
+                    placesTableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
