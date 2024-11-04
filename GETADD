@@ -109,9 +109,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function initMap() {
         const isMobile = window.innerWidth <= 768; // 모바일 기기 기준 화면 너비 설정
         const initialZoom = isMobile ? 2 : 1; // 모바일에서는 줌 레벨을 더 축소
+        const initialCenter = isMobile ? { lat: 15, lng: 65 } : { lat: 15, lng: 150 };
 
         map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 15, lng: 150 },
+            center: initialCenter,
             zoom: initialZoom,
         });
 
