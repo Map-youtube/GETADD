@@ -107,17 +107,12 @@
             width: 100%;
             max-width: 560px;
             height: auto;
-        }
-        @media (max-width: 768px) {
-            #youtube-link iframe {
-                max-width: 100%;
-                aspect-ratio: 16 / 9;
-            }
+            aspect-ratio: 16 / 9; /* PC, 모바일 환경 모두 비율 유지 */
         }
         @media (min-width: 769px) {
             #youtube-link iframe {
                 max-width: 672px; /* 120% 크기 */
-                height: auto;
+                height: calc(672px * 9 / 16); /* 비율에 맞춰 높이 조정 */
             }
         }
     </style>
