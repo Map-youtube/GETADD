@@ -89,6 +89,18 @@
             font-size: 1.2em;
             color: lightgray;
         }
+        /* 유튜브 비디오 하단 링크 스타일 */
+        #youtube-link {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            width: 560px;
+            height: 315px;
+        }
+        #youtube-link iframe {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -101,6 +113,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="subtitle">Travel from Your home with YOUTUBE</div>
     </div>
     <div id="map"></div>
+
+    <!-- 유튜브 링크 추가 -->
+    <div id="youtube-link">
+        <iframe src="https://www.youtube.com/embed/AcMnXigCFio?si=arAt4JnO41Co3DG-" frameborder="0" allowfullscreen></iframe>
+    </div>
 
 <script>
     let map, currentInfoWindow;
