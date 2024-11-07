@@ -231,8 +231,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             "th": "ท่องเที่ยวจากที่บ้านด้วย YOUTUBE LIVE"
         };
 
+        const descriptions = {
+            "ko": "Google 지도에서 다양한 나라의 도시, 자연, 명소를 유튜브 라이브 영상을 통해 탐험하세요. 집에서 편안하게 세계 여행을 즐기며 꿈의 여행지를 찾아보세요.",
+            "en": "Explore cities, nature, and landmarks from various countries on Google Maps through live YouTube videos. Enjoy a world tour from the comfort of your home and discover your next dream destination.",
+            "es": "Explora ciudades, naturaleza y monumentos de varios países en Google Maps a través de videos en vivo de YouTube. Disfruta de un tour mundial desde la comodidad de tu hogar y descubre tu próximo destino soñado.",
+            "zh": "通过 YouTube 直播视频，在 Google 地图上探索来自各国的城市、自然和地标。在家舒适地享受全球旅游，发现下一个梦想目的地。",
+            "hi": "Google मैप्स पर विभिन्न देशों के शहरों, प्रकृति और स्थलों को लाइव YouTube वीडियो के माध्यम से एक्सप्लोर करें। अपने घर की आरामदायक यात्रा से दुनिया का भ्रमण करें और अपनी अगली सपनों की मंजिल खोजें।",
+            "ar": "استكشف المدن والطبيعة والمعالم من مختلف البلدان على خرائط جوجل من خلال مقاطع الفيديو المباشرة على يوتيوب. استمتع بجولة حول العالم من راحة منزلك واكتشف وجهة أحلامك التالية.",
+            "pt": "Explore cidades, natureza e marcos de vários países no Google Maps através de vídeos ao vivo no YouTube. Aproveite um tour mundial do conforto de sua casa e descubra seu próximo destino dos sonhos.",
+            "ru": "Исследуйте города, природу и достопримечательности разных стран на Google Картах с помощью живых видео на YouTube. Наслаждайтесь мировым туром, не выходя из дома, и откройте для себя следующее место своей мечты.",
+            "ja": "Google マップで様々な国の都市、自然、名所を YouTube ライブ動画で探険しよう。自宅の快適さから世界を旅し、次の夢の目的地を見つけよう。",
+            "fr": "Explorez les villes, la nature et les monuments de divers pays sur Google Maps via des vidéos en direct sur YouTube. Profitez d'un tour du monde depuis le confort de votre maison et découvrez votre prochaine destination de rêve.",
+            "de": "Entdecken Sie Städte, Natur und Sehenswürdigkeiten aus verschiedenen Ländern auf Google Maps durch Live-YouTube-Videos. Genießen Sie eine Weltreise aus dem Komfort Ihres Zuhauses und entdecken Sie Ihr nächstes Traumziel.",
+            "th": "สำรวจเมือง ธรรมชาติ และสถานที่สำคัญจากหลายประเทศบน Google Maps ผ่านวิดีโอ YouTube สด เพลิดเพลินกับการท่องโลกจากบ้านของคุณและค้นหาสถานที่ท่องเที่ยวในฝันแห่งต่อไป"
+        };
+
         document.title = titles[userLang] || titles["en"];
         document.getElementById("subtitle").textContent = subtitles[userLang] || subtitles["en"];
+        document.querySelector('meta[name="description"]').setAttribute('content', descriptions[userLang] || descriptions["en"]);
+
         initMap();
     };
 </script>
