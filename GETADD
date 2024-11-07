@@ -99,7 +99,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <div class="top-banner">
         <a href="#" onclick="window.location.reload()">LIVECAM-VOYAGER.COM</a>
-        <div class="subtitle">Travel from Your home with YOUTUBE LIVE</div>
+        <div class="subtitle" id="subtitle">Travel from Your home with YOUTUBE LIVE</div>
     </div>
     <div id="map"></div>
 
@@ -198,26 +198,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     window.onload = function() {
-        const userLang = navigator.language || navigator.userLanguage;
+        const userLang = navigator.language.slice(0, 2);
         document.documentElement.lang = userLang;
 
         const titles = {
-            "ko": "세계 카페 탐방 | 유튜브 스트리밍으로 집에서 떠나는 랜선 여행",
-            "en": "Explore World Cafés | A Virtual Tour from Home with YouTube Streaming",
-            "es": "Explora Cafés del Mundo | Un Tour Virtual desde Casa con Streaming de YouTube",
-            "zh": "探索全球咖啡馆 | 在家中通过YouTube直播进行虚拟旅行",
-            "hi": "विश्व के कैफे का अन्वेषण करें | YouTube स्ट्रीमिंग के साथ घर से एक वर्चुअल टूर",
-            "ar": "استكشف المقاهي حول العالم | جولة افتراضية من المنزل عبر بث يوتيوب",
-            "pt": "Explore Cafés ao Redor do Mundo | Um Tour Virtual de Casa com Streaming do YouTube",
-            "ru": "Исследуйте кафе мира | Виртуальный тур из дома с трансляцией на YouTube",
-            "ja": "世界のカフェ探訪 | YouTubeストリーミングで家からバーチャル旅行",
-            "fr": "Explorez les Cafés du Monde | Un Tour Virtuel depuis chez vous avec YouTube Streaming",
-            "de": "Entdecken Sie Weltcafés | Eine virtuelle Tour von zu Hause mit YouTube-Streaming",
-            "th": "สำรวจคาเฟ่ทั่วโลก | ทัวร์เสมือนจริงจากที่บ้านผ่าน YouTube Streaming"
-          
+            "ko": "유튜브 라이브로 집에서 떠나는 랜선 여행",
+            "en": "Travel from Your home with YOUTUBE LIVE",
+            "es": "Viaja desde casa con YOUTUBE LIVE",
+            "zh": "在家中通过 YouTube 直播环游世界",
+            "hi": "घर बैठे YOUTUBE LIVE से यात्रा करें",
+            "ar": "سافر من منزلك عبر YOUTUBE LIVE",
+            "pt": "Viaje de sua casa com o YOUTUBE LIVE",
+            "ru": "Путешествуйте из дома с YOUTUBE LIVE",
+            "ja": "自宅から YOUTUBE ライブで旅を",
+            "fr": "Voyagez de chez vous avec YOUTUBE LIVE",
+            "de": "Reisen Sie von zu Hause mit YOUTUBE LIVE",
+            "th": "ท่องเที่ยวจากที่บ้านด้วย YOUTUBE LIVE"
+        };
+
+        const subtitles = {
+            "ko": "유튜브 라이브로 집에서 떠나는 랜선 여행",
+            "en": "Travel from Your home with YOUTUBE LIVE",
+            "es": "Viaja desde casa con YOUTUBE LIVE",
+            "zh": "在家中通过 YouTube 直播环游世界",
+            "hi": "घर बैठे YOUTUBE LIVE से यात्रा करें",
+            "ar": "سافر من منزلك عبر YOUTUBE LIVE",
+            "pt": "Viaje de sua casa com o YOUTUBE LIVE",
+            "ru": "Путешествуйте из дома с YOUTUBE LIVE",
+            "ja": "自宅から YOUTUBE ライブで旅を",
+            "fr": "Voyagez de chez vous avec YOUTUBE LIVE",
+            "de": "Reisen Sie von zu Hause mit YOUTUBE LIVE",
+            "th": "ท่องเที่ยวจากที่บ้านด้วย YOUTUBE LIVE"
         };
 
         document.title = titles[userLang] || titles["en"];
+        document.getElementById("subtitle").textContent = subtitles[userLang] || subtitles["en"];
         initMap();
     };
 </script>
