@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore cities, nature, and landmarks from various countries on Google Maps through live YouTube videos. Enjoy a world tour from the comfort of your home and discover your next dream destination.">
-    <title>Travel from Your home with YouTube</title>
+    <title>Travel from Your home with YouTube LIVE</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjMNd7u5X5jetqbFXJEr-hF-Ku8_oReGI"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.16.9/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@googlemaps/markerclusterer/dist/index.min.js"></script>
@@ -68,7 +68,7 @@
             position: absolute;
             top: 0;
             width: 100%;
-            height: 10vh; /* 배너 높이 원래대로 */
+            height: 10vh;
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
             display: flex;
@@ -81,7 +81,7 @@
         }
         .top-banner a {
             color: white;
-            font-size: 2.25em; /* 글자 크기를 1.5배 수준으로 조정 */
+            font-size: 2.25em;
             font-weight: bold;
             text-decoration: none;
             cursor: pointer;
@@ -89,32 +89,6 @@
         .top-banner .subtitle {
             font-size: 1.2em;
             color: lightgray;
-        }
-        /* 유튜브 비디오 하단 링크 스타일 */
-        #youtube-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px auto;
-        }
-        #youtube-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-align: center;
-            color: #333;
-        }
-        #youtube-link iframe {
-            width: 100%;
-            max-width: 560px;
-            height: auto;
-            aspect-ratio: 16 / 9; /* PC, 모바일 환경 모두 비율 유지 */
-        }
-        @media (min-width: 769px) {
-            #youtube-link iframe {
-                max-width: 672px; /* 120% 크기 */
-                height: calc(672px * 9 / 16); /* 비율에 맞춰 높이 조정 */
-            }
         }
     </style>
 </head>
@@ -124,30 +98,23 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <div class="top-banner">
-        <a href="#" onclick="window.location.reload()">LIVECAM-VOYAGER.COM</a> <!-- 새로고침 기능으로 수정 -->
-        <div class="subtitle">Travel from Your home with YOUTUBE</div>
+        <a href="#" onclick="window.location.reload()">LIVECAM-VOYAGER.COM</a>
+        <div class="subtitle">Travel from Your home with YOUTUBE LIVE</div>
     </div>
     <div id="map"></div>
-
-    <!-- 유튜브 제목과 링크 추가 -->
-    <div id="youtube-link">
-        <div id="youtube-title">US Poll Counting | US Poll Result Live | Kamala Vs Trump | Who Will Win Trump Or Kamala? - YouTube Stream</div>
-        <iframe src="https://www.youtube.com/embed/AcMnXigCFio?si=arAt4JnO41Co3DG-" frameborder="0" allowfullscreen></iframe>
-    </div>
 
 <script>
     let map, currentInfoWindow;
     const markers = [];
 
     function initMap() {
-        const isMobile = window.innerWidth <= 768; // 모바일 기기 기준 화면 너비 설정
-        const initialZoom = isMobile ? 2 : 3; // 모바일에서는 줌 레벨을 더 축소
+        const isMobile = window.innerWidth <= 768;
+        const initialZoom = isMobile ? 2 : 3;
         const initialCenter = isMobile ? { lat: 25, lng: 65 } : { lat: 15, lng: 150 };
 
         map = new google.maps.Map(document.getElementById("map"), {
             center: initialCenter,
             zoom: initialZoom,
-            gestureHandling: "greedy" // ctrl 없이 확대/축소 가능
         });
 
         fetch("https://raw.githubusercontent.com/Map-youtube/map-youtube/main/location.xlsx")
@@ -233,6 +200,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     window.onload = function() {
         const userLang = navigator.language || navigator.userLanguage;
         document.documentElement.lang = userLang;
+
+        const titles = {
+            "ko": "세계 카페 탐방 | 유튜브 스트리밍으로 집에서 떠나는 랜선 여행",
+            "en": "Explore Cafes Worldwide | Virtual Travel from Home with YouTube Streaming",
+            "ja": "世界のカフェ巡り | YouTubeストリーミングで自宅からバーチャル旅行",
+            "es": "Explora Cafés del Mundo | Viaje Virtual desde Casa con YouTube",
+            "fr": "Explorez des Cafés du Monde | Voyage Virtuel depuis Chez Vous avec YouTube",
+            "de": "Erkunden Sie Cafés weltweit | Virtuelle Reise von zu Hause mit YouTube-Streaming"
+        };
+
+        document.title = titles[userLang] || titles["en"];
         initMap();
     };
 </script>
